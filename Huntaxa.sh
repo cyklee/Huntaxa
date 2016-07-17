@@ -1,9 +1,15 @@
 #!/usr/bin/env/bash
 
+# Huntaxa 2016
+# Simple taxa search with abundance treshold critera from microbiome studies
+# Kevin C Lee
+# http://kev.in
+
 conversion() {
+# conversion() does the the following:
 # 1. Find all biom files in the subdirectories
 # 2. Convert the counts to relative abundance
-# 3. Convert biom file to tsv table
+# 3. Convert biom files to tsv tables in the current directory
 for i in $(find -iregex ".*.biom");
 do
 file=$(basename -s .biom $i)
@@ -44,7 +50,7 @@ cd ${name}_${threshold}
 # Awk search on individual grep output
 for i in *.tsv; do
 	grep_file=$(basename -s .tsv $i)
-	#The header seems to be included as a side effect
+	head $i -n1 > ${grep_file}_${threshold}.tsv # Inherit the sample header from the previous groups of files
 	awk -v var="$threshold" -F '\t' 'FNR>1 {for (i=2; i<NF; i++) if ($i >=var) {print $0;next}}' $i >> \
 	${grep_file}_${threshold}.tsv
 done
@@ -57,7 +63,9 @@ echo "Analysis completed."
 
 main() {
 cat<<EOF
- Microbiome meta-analysis script
+ 
+ Microbiome meta-analysis script v1.0
+ Simple taxa search with abundance treshold critera from microbiome studies
 ------------------------------
  Kevin C Lee 2016 http://kev.in
 
