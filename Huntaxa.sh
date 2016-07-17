@@ -4,6 +4,16 @@
 # Simple taxa search with abundance treshold critera from microbiome studies
 # Kevin C Lee
 # http://kev.in
+# ---------------------------------------------------------------------------
+# Dependency: Python package 'biom-format' (biom-format.org)
+
+# Input: biom files (.biom) with count information & taxonomic metadata (e.g. from qiita.ucsd.edu).
+# Intermediary: relative abundance biom files, a tsv file with lines containing the specified taxon
+# Output: tsv file containing lines of taxon of interest exceeding the specified relative abundance threshold
+# ---------------------------------------------------------------------------
+# With the the Dead Guy CLI viewer (https://github.com/kristianperkins/x_x)
+# You can view the resulting tsv file with command:
+# x_x -d$'\t' -f csv -h 1 output.tsv 
 
 conversion() {
 # conversion() does the the following:
@@ -66,21 +76,15 @@ cat<<EOF
  
  Microbiome meta-analysis script v1.0
  Simple taxa search with abundance treshold critera from microbiome studies
-------------------------------
+
+ ------------------------------
  Kevin C Lee 2016 http://kev.in
-
- * Purpose: Find occurances of taxa of interest exceeding certain relative abundance in multiple microbiomes
- * Dependency: Python package 'biom-format' (biom-format.org)
-
- * Input:        biom files (.biom) with count information & taxonomic metadata (e.g. from qiita.ucsd.edu)
- * Intermediary: relative abundance biom files, a tsv file with lines containing the specified taxon name 
- * Output:       tsv file containing lines of taxon of interest exceeding the specified relative
-                 abundance threshold
-
+ 
  For the first run, you should select (1) to convert the biom files to relative abundance
  tables in plain text format. You may use option (2) to conduct additional analysis with different
  taxa and abundance threshold. Press (3) to exit this script.
-------------------------------
+ ------------------------------
+
 EOF
 
 PS3="Select an option (1-3):"
