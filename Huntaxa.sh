@@ -65,8 +65,17 @@ for i in *.tsv; do
 	${grep_file}_${threshold}.tsv
 done
 
+# Tidy up here, delete file with no hits
+for i in *.tsv; do
+	lc=$(wc -l $i | cut -d " " -f 1)
+	if [ "$lc" -eq "1" ] # The spaces in condiciton expression [] are mandatory
+	then
+		echo "Removing $i for having no hits"
+		rm $i
+	fi
+done
+
 # Or use tee to print to screen for diagnostics while outputting to a file.
-# I can probably prepend the first line of the OTU table for the sample headers...
 cd ..
 echo "Analysis completed."
 }
@@ -74,7 +83,7 @@ echo "Analysis completed."
 main() {
 cat<<EOF
  
- Microbiome meta-analysis script v1.0
+ Microbiome meta-analysis script v1.1
  Simple taxa search with abundance treshold critera from microbiome studies
 
  ------------------------------
@@ -105,7 +114,6 @@ select yn1 in "Conversion + Analysis" "Analysis Only" "Exit"; do
 done
 }
 
-# A note to self, the spaces in the conditional expression [ $variable = "true" ]  are mandatory
 
 main
 echo "All done. Have a nice day!"
