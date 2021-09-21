@@ -1,15 +1,17 @@
 #!/usr/bin/env/bash
 
-# Huntaxa 2016
+# Huntaxa 2016-2021
 # Simple taxa search with abundance treshold critera from microbiome studies
 # Kevin C Lee
-# http://kev.in
+# http://cykev.in
 # ---------------------------------------------------------------------------
 # Dependency: Python package 'biom-format' (biom-format.org)
 
-# Input: biom files (.biom) with count information & taxonomic metadata (e.g. from qiita.ucsd.edu).
+# Input:
+# 1. All biom files (.biom) in current (sub)-directories with count information & taxonomic metadata (e.g. from qiita.ucsd.edu).
+# 2. A taxon name (e.g. Proteobacteria)
 # Intermediary: relative abundance biom files, a tsv file with lines containing the specified taxon
-# Output: tsv file containing lines of taxon of interest exceeding the specified relative abundance threshold
+# Output: tsv file containing lines of taxa of interest exceeding the specified relative abundance threshold
 # ---------------------------------------------------------------------------
 # With the the Dead Guy CLI viewer (https://github.com/kristianperkins/x_x)
 # You can view the resulting tsv file with command:
@@ -83,11 +85,11 @@ echo "Analysis completed."
 main() {
 cat<<EOF
  
- Microbiome meta-analysis script v1.1
+ Huntaxa Microbiome meta-analysis script v1.1
  Simple taxa search with abundance treshold critera from microbiome studies
 
  ------------------------------
- Kevin C Lee 2016 http://kev.in
+ Kevin C Lee 2016-2021 http://cykev.in
  
  For the first run, you should select (1) to convert the biom files to relative abundance
  tables in plain text format. You may use option (2) to conduct additional analysis with different
